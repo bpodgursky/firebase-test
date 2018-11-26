@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Login</title>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = // TODO fill in;
+    firebase.initializeApp(config);
+  </script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.4.1/firebaseui.css"/>
+
+  <script type="text/javascript">
+    var uiConfig = {
+      signInSuccessUrl: 'ex1-login.html',
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID
+      ]
+    };
+
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-auth-container', uiConfig);
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      $("#name").text(user.displayName)
+    });
+
+  </script>
+</head>
+<body>
+<div id="firebaseui-auth-container"></div>
+<span>Hello </span><span id="name"></span>
+</body>
+</html>
