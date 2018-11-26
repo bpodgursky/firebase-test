@@ -72,7 +72,6 @@
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
 
-      console.log(user);
       $("#name").text(user.displayName);
 
       db.ref('/users/' + user.uid).set({
@@ -94,7 +93,6 @@
             var $done = $("<button>Done!</button>").addClass("btn btn-success");
             $done.click((function(key){
               return function(){
-                console.log("deleting "+key);
                 db.ref('/data/' + user.uid+ '/items/'+key).remove()
               }
             })(key));
